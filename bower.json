@@ -1,0 +1,26 @@
+{
+  "name": "jmaths",
+  "version": "0.0.3",
+  "homepage": "https://github.com/zswang/jmaths",
+  "authors": [
+    "Zswang <wjhu111@21cn.com>"
+  ],
+  "description": "Math JS Library",
+  "main": "dist/jmaths.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "md5",
+    "javascript"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/components",
+    "test",
+    "tests"
+  ]
+}

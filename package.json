@@ -1,0 +1,36 @@
+{
+  "name": "jmaths",
+  "title": "jmaths",
+  "description": "Math JS Library",
+  "version": "0.0.1",
+  "homepage": "https://github.com/zswang/jmaths",
+  "main": "src/jmaths.js",
+  "author": {
+    "name": "zswang",
+    "url": "http://weibo.com/zswang"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zswang/jmaths.git"
+  },
+  "keywords": [
+    "md5",
+    "javascript"
+  ],
+  "bugs": {
+    "url": "https://github.com/zswang/jmaths/issues"
+  },
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*",
+    "uglify-js": "*",
+    "jshint": "*"
+  },
+  "scripts": {
+  	"test": "mocha -R spec && npm run coverage",
+    "compress": "uglifyjs src/jmaths.js -o dist/jmaths.min.js --source-map dist/jmaths.min.js.map -p 5 -c -m",
+    "lint": "jshint src/*.js *.json"
+  }
+}
