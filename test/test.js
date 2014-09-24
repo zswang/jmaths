@@ -26,4 +26,16 @@ describe('jmaths', function() {
     assert.ok(Math.abs(jmaths.bezier([0, 2, 10], 0.5) - 3.5) <= 1e-10);
   });
 
+  it('cutBezier([0, 2, 10], 0.5)', function() {
+    var a = jmaths.cutBezier([0, 2, 10], 0.5);
+    assert.ok(
+      Math.abs(a[0][0] - 0) <= 1e-10 &&
+      Math.abs(a[0][1] - 1) <= 1e-10 &&
+      Math.abs(a[0][2] - 3.5) <= 1e-10 &&
+      Math.abs(a[1][0] - 3.5) <= 1e-10 &&
+      Math.abs(a[1][1] - 6) <= 1e-10 &&
+      Math.abs(a[1][2] - 10) <= 1e-10
+    );
+  });
+
 });
