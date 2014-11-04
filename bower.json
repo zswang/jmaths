@@ -1,6 +1,6 @@
 {
   "name": "jmaths",
-  "version": "0.0.3",
+  "version": "0.0.2",
   "homepage": "https://github.com/zswang/jmaths",
   "authors": [
     "Zswang <wjhu111@21cn.com>"
@@ -16,6 +16,10 @@
     "javascript"
   ],
   "license": "MIT",
+  "devDependencies": {
+    "seajs": "2.3.0",
+    "requirejs": "2.1.15"
+  },
   "ignore": [
     "**/.*",
     "node_modules",
