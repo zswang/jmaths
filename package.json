@@ -2,7 +2,7 @@
   "name": "jmaths",
   "title": "jmaths",
   "description": "Math JS Library",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "homepage": "https://github.com/zswang/jmaths",
   "main": "src/jmaths.js",
   "author": {
@@ -16,7 +16,8 @@
   "keywords": [
     "math",
     "geometric",
-    "javascript"
+    "javascript",
+    "bezier"
   ],
   "bugs": {
     "url": "https://github.com/zswang/jmaths/issues"
@@ -31,7 +32,7 @@
     "jshint": "2.5.8"
   },
   "scripts": {
-  	"test": "mocha -R spec && npm run coverage",
+  	"test": "mocha -R spec",
     "dist": "jdists src/jmaths.js -o jmaths.js && uglifyjs jmaths.js -o jmaths.min.js -p 5 -c -m",
     "lint": "jshint src/*.js *.json"
   }
