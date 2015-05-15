@@ -195,7 +195,7 @@
    *
    * @param {Array[number,number]} point
    * @param {Array[Array[number,number]]} polyline
-   * @return number 返回距离
+   * @return {number} 返回距离
    */
   function pointToPolyline(point, polyline) {
     if (!point || !polyline || !polyline.length) {
@@ -238,9 +238,11 @@
         return exports;
       });
     }
-  } else if (typeof module !== 'undefined' && module.exports) {
+  }
+  else if (typeof module !== 'undefined' && module.exports) {
     module.exports = exports;
-  } else {
+  }
+  else {
     window[exportName] = exports;
   }
 
