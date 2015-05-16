@@ -155,6 +155,7 @@
   /**
    * 获取两条线段的交点
    *
+   * @see http://www.kevlindev.com/gui/math/intersection/Intersection.js
    * @param {Array[number,number]} a 第一条线段坐标1
    * @param {Array[number,number]} b 第一条线段坐标2
    * @param {Array[number,number]} c 第二条线段坐标1
@@ -162,29 +163,20 @@
    * @return {Array[number,number]} 返回两条线段的交点坐标
    */
   function doubleLineIntersect(a, b, c, d) {
-    var delta = (b[1] - a[1]) * (d[0] - c[0]) -
-      (d[1] - c[1]) * (b[0] - a[0]);
-    if (delta === 0) {
-      return;
-    }
-    var x = (
-      (b[0] - a[0]) * (d[0] - c[0]) * (c[1] - a[1]) +
-      (b[1] - a[1]) * (d[0] - c[0]) * a[0] -
-      (d[1] - c[1]) * (b[0] - a[0]) * c[0]
-    ) / delta;
-    var y = (
-      (b[1] - a[1]) * (d[1] - c[1]) * (c[0] - a[0]) +
-      (b[0] - a[0]) * (d[1] - c[1]) * a[1] -
-      (d[0] - c[0]) * (b[1] - a[1]) * c[1]
-    ) / -delta;
+    var ua_t = (d[0] - c[0]) * (a[1] - c[1]) - (d[1] - c[1]) * (a[0] - c[0]);
+    var ub_t = (b[0] - a[0]) * (a[1] - c[1]) - (b[1] - a[1]) * (a[0] - c[0]);
+    var u_b = (d[1] - c[1]) * (b[0] - a[0]) - (d[0] - c[0]) * (b[1] - a[1]);
 
-    if (
-      (sign(x - a[0]) * sign(x - b[0]) <= 0) &&
-      (sign(x - c[0]) * sign(x - d[0]) <= 0) &&
-      (sign(y - a[1]) * sign(y - b[1]) <= 0) &&
-      (sign(y - c[1]) * sign(y - d[1]) <= 0)
-    ) {
-      return [x, y];
+    if (u_b != 0) {
+      var ua = ua_t / u_b;
+      var ub = ub_t / u_b;
+
+      if (0 <= ua && ua <= 1 && 0 <= ub && ub <= 1) {
+        return [
+          a[0] + ua * (b[0] - a[0]),
+          a[1] + ua * (b[1] - a[1])
+        ];
+      }
     }
   }
 
