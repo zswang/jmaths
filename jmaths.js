@@ -203,6 +203,36 @@
   exports.pointToPolyline = pointToPolyline;
 
   /**
+   * 判断点是否在多边形中
+   *
+   * @param {Array} p 点坐标
+   * @param {Array} polygon 多边形坐标
+   * @return {boolean} 返回点是否在多边形中
+   */
+  function pointInPolygon(p, polygon) {
+    var cross = 0;
+    for (var i = 0; i < polygon.length; i++) {
+      var p1 = polygon[i];
+      var p2 = polygon[(i + 1) % polygon.length];
+      if (p1[1] === p2[1]) {
+        continue;
+      }
+      if (p[1] < Math.min(p1[1], p2[1])) {
+        continue;
+      }
+      if (p[1] >= Math.max(p1[1], p2[1])) {
+        continue;
+      }
+      var x = (p[1] - p1[1]) * (p2[0] - p1[0]) / (p2[1] - p1[1]) + p1[0];
+      if (x > p[0]) {
+        cross++;
+      }
+    }
+    return cross % 2 === 1;
+  }
+  exports.pointInPolygon = pointInPolygon;
+
+  /**
    * 生成正多边形顶点
    *
    * @param {number} edges 边数
