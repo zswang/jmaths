@@ -1,16 +1,31 @@
-(function(exportName) {
+(function (exportName) {
 
+  /*<remove>*/
   'use strict';
+  /*</remove>*/
 
   var exports = exports || {};
 
+  /*<jdists encoding="ejs" data="../package.json">*/
   /**
-   * 数学函数收集
+   * @file <%- name %>
    *
-   * @author 王集鹄(wangjihu,http://weibo.com/zswang)
-   * @version 2015-04-12
+   * <%- description %>
+   * @author
+       <% (author instanceof Array ? author : [author]).forEach(function (item) { %>
+   *   <%- item.name %> (<%- item.url %>)
+       <% }); %>
+   * @version <%- version %>
+       <% var now = new Date() %>
+   * @date <%- [
+        now.getFullYear(),
+        now.getMonth() + 101,
+        now.getDate() + 100
+      ].join('-').replace(/-1/g, '-') %>
    */
+  /*</jdists>*/
 
+  /*<function name="pointToPoint">*/
   /**
    * 计算点到点之间的距离
    *
@@ -21,9 +36,11 @@
   function pointToPoint(a, b) {
     return Math.sqrt(Math.pow(a[0] - b[0], 2) + Math.pow(a[1] - b[1], 2));
   }
+  /*</function>*/
 
   exports.pointToPoint = pointToPoint;
 
+  /*<function name="pointToAngle">*/
   /**
    * 计算点的角度
    *
@@ -34,9 +51,10 @@
   function pointToAngle(origin, point) {
     return Math.atan2(point[1] - origin[1], point[0] - origin[0]);
   }
-
+  /*</function>*/
   exports.pointToAngle = pointToAngle;
 
+  /*<function name="rotatePoint" dependencies="pointToPoint,pointToAngle">*/
   /**
    * 旋转一个点坐标
    *
@@ -53,9 +71,10 @@
       center[1] + Math.sin(angle) * radius
     ];
   }
-
+  /*</function>*/
   exports.rotatePoint = rotatePoint;
 
+  /*<function name="bezier">*/
   /**
    * 贝赛尔公式，支持多维数组
    *
@@ -67,33 +86,34 @@
     if (!items || !items.length) {
       return;
     }
-    var first = items[0],
-      second = items[1];
+    var first = items[0];
+    var second = items[1];
     var level = first instanceof Array ? first.length : 0; // 下标数,0为非数组
     var i;
     switch (items.length) {
-      case 1:
-        return level ? first.slice() : first; // 数组需要克隆，非数组直接返回
-      case 2:
-        if (level) { // 非数组
-          var result = [];
-          for (i = 0; i < level; i++) {
-            result[i] = bezier([first[i], second[i]], rate);
-          }
-          return result;
+    case 1:
+      return level ? first.slice() : first; // 数组需要克隆，非数组直接返回
+    case 2:
+      if (level) { // 非数组
+        var result = [];
+        for (i = 0; i < level; i++) {
+          result[i] = bezier([first[i], second[i]], rate);
         }
-        return first + (second - first) * rate;
-      default:
-        var temp = [];
-        for (i = 1; i < items.length; i++) {
-          temp.push(bezier([items[i - 1], items[i]], rate));
-        }
-        return bezier(temp, rate);
+        return result;
+      }
+      return first + (second - first) * rate;
+    default:
+      var temp = [];
+      for (i = 1; i < items.length; i++) {
+        temp.push(bezier([items[i - 1], items[i]], rate));
+      }
+      return bezier(temp, rate);
     }
   }
-
+  /*</function>*/
   exports.bezier = bezier;
 
+  /*<function name="cutBezier" dependencies="bezier">*/
   /**
    * 将一条贝赛尔数组剪成两段
    *
@@ -118,9 +138,10 @@
     }
     return [ra, rb];
   }
-
+  /*</function>*/
   exports.cutBezier = cutBezier;
 
+  /*<function name="cutBezier" dependencies="pointToPoint,bezier">*/
   /**
    * 计算点到线段的距离
    *
@@ -131,15 +152,16 @@
    */
   function pointToLine(point, a, b) {
     if (a[0] == b[0] && a[1] == b[1]) {
-      return 0;
+      return pointToPoint(point, a);
     }
     var t = ((a[0] - b[0]) * (a[0] - point[0]) + (a[1] - b[1]) * (a[1] - point[1])) /
       ((a[0] - b[0]) * (a[0] - b[0]) + (a[1] - b[1]) * (a[1] - b[1]));
     return pointToPoint(point, bezier([a, b], Math.max(0, Math.min(1, t))));
   }
-
+  /*</function>*/
   exports.pointToLine = pointToLine;
 
+  /*<function name="sign">*/
   /**
    * 获取正负符号
    *
@@ -149,9 +171,10 @@
   function sign(x) {
     return x === 0 ? 0 : (x < 0 ? -1 : 1);
   }
-
+  /*</function>*/
   exports.sign = sign;
 
+  /*<function name="doubleLineIntersect">*/
   /**
    * 获取两条线段的交点
    *
@@ -179,9 +202,10 @@
       }
     }
   }
-
+  /*</function>*/
   exports.doubleLineIntersect = doubleLineIntersect;
 
+  /*<function name="pointToPolyline" dependencies="pointToPoint,pointToLine">*/
   /**
    * 计算点到多边形的距离
    *
@@ -199,9 +223,10 @@
     }
     return result;
   }
-
+  /*</function>*/
   exports.pointToPolyline = pointToPolyline;
 
+  /*<function name="pointInPolygon">*/
   /**
    * 判断点是否在多边形中
    *
@@ -230,8 +255,10 @@
     }
     return cross % 2 === 1;
   }
+  /*</function>*/
   exports.pointInPolygon = pointInPolygon;
 
+  /*<function name="regularPolygon">*/
   /**
    * 生成正多边形顶点
    *
@@ -252,11 +279,12 @@
     }
     return result;
   }
+  /*</function>*/
   exports.regularPolygon = regularPolygon;
 
   if (typeof define === 'function') {
     if (define.amd || define.cmd) {
-      define(function() {
+      define(function () {
         return exports;
       });
     }

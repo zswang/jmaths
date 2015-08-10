@@ -1,8 +1,11 @@
 {
   "name": "jmaths",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "homepage": "https://github.com/zswang/jmaths",
-  "authors": "zswang",
+  "authors": {
+    "name": "zswang",
+    "url": "http://weibo.com/zswang"
+  },
   "description": "Math JS Library",
   "main": "jmaths.js",
   "moduleType": [
