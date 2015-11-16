@@ -37,7 +37,6 @@
     return Math.sqrt(Math.pow(a[0] - b[0], 2) + Math.pow(a[1] - b[1], 2));
   }
   /*</function>*/
-
   exports.pointToPoint = pointToPoint;
 
   /*<function name="pointToAngle">*/
@@ -54,7 +53,7 @@
   /*</function>*/
   exports.pointToAngle = pointToAngle;
 
-  /*<function name="rotatePoint" dependencies="pointToPoint,pointToAngle">*/
+  /*<function name="rotatePoint" depend="pointToPoint,pointToAngle">*/
   /**
    * 旋转一个点坐标
    *
@@ -113,7 +112,7 @@
   /*</function>*/
   exports.bezier = bezier;
 
-  /*<function name="cutBezier" dependencies="bezier">*/
+  /*<function name="cutBezier" depend="bezier">*/
   /**
    * 将一条贝赛尔数组剪成两段
    *
@@ -141,7 +140,7 @@
   /*</function>*/
   exports.cutBezier = cutBezier;
 
-  /*<function name="cutBezier" dependencies="pointToPoint,bezier">*/
+  /*<function name="cutBezier" depend="pointToPoint,bezier">*/
   /**
    * 计算点到线段的距离
    *
@@ -205,7 +204,7 @@
   /*</function>*/
   exports.doubleLineIntersect = doubleLineIntersect;
 
-  /*<function name="pointToPolyline" dependencies="pointToPoint,pointToLine">*/
+  /*<function name="pointToPolyline" depend="pointToPoint,pointToLine">*/
   /**
    * 计算点到多边形的距离
    *
