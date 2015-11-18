@@ -2,7 +2,7 @@
   "name": "jmaths",
   "title": "jmaths",
   "description": "Math JS Library",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "homepage": "https://github.com/zswang/jmaths",
   "main": "jmaths.js",
   "author": {

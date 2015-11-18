@@ -101,6 +101,27 @@
    * @param{Array[Array[number, ...],...]} items 每个参考点
    * @param{number} rate 比率
    * @return{number|Array[number, ...]} 返回
+   '''<example>'''
+   * @example bezier():base
+    ```js
+    console.log(jmaths.bezier([0, 1], 0.3));
+    // > 0.3
+    console.log(jmaths.bezier([0, 1, 2], 0.3));
+    // > 0.6
+    console.log(jmaths.bezier([0, 1.5, 2], 0.3));
+    // > 0.8099999999999999
+    ```
+   * @example bezier():multidimensional
+    ```js
+    console.log(JSON.stringify(jmaths.bezier([[0, 0, 0], [1, 1, 2]], 0.3)));
+    // > [0.3,0.3,0.6]
+    ```
+   * @example bezier():complex
+    ```js
+    console.log(JSON.stringify(jmaths.bezier([[0, 0, 0], [1, 1, 0], [2, 2, 1]], 0.3)));
+    // > [0.6,0.6,0.09]
+    ```
+   '''</example>'''
    */
   function bezier(items, rate) {
     if (!items || !items.length) {
@@ -140,6 +161,15 @@
    * @param {Array[Array[number, number],...]} items 贝赛尔每个参考点
    * @param {number} rate 比率
    * @return {Array[Array,Array]} 返回被裁剪后的两个贝赛尔数组
+   '''<example>'''
+   * @example cutBezier():base
+    ```js
+    console.log(JSON.stringify(jmaths.cutBezier(
+      [[0, 0, 0], [1, 1, 0], [2, 2, 1]], 0.3))
+    );
+    // > [[[0,0,0],[0.3,0.3,0],[0.6,0.6,0.09]],[[0.6,0.6,0.09],[1.3,1.3,0.3],[2,2,1]]]
+    ```
+   '''</example>'''
    */
   function cutBezier(items, rate) {
     if (!items || items.length < 2) {
@@ -161,7 +191,7 @@
   /*</function>*/
   exports.cutBezier = cutBezier;
 
-  /*<function name="cutBezier" depend="pointToPoint,bezier">*/
+  /*<function name="pointToLine" depend="pointToPoint,bezier">*/
   /**
    * 计算点到线段的距离
    *
@@ -169,9 +199,18 @@
    * @param {Array[number,number]} a 线段坐标1
    * @param {Array[number,number]} b 线段坐标2
    * @return {number} 返回点到线段的距离
+   '''<example>'''
+   * @example pointToLine():base
+    ```js
+    console.log(JSON.stringify(jmaths.pointToLine([50, 0], [0, 0], [0, 30])));
+    // > 50
+    console.log(JSON.stringify(jmaths.pointToLine([50, 0], [0, 30], [100, 35])));
+    // > 32.45945101352995
+    ```
+   '''</example>'''
    */
   function pointToLine(point, a, b) {
-    if (a[0] == b[0] && a[1] == b[1]) {
+    if (a[0] === b[0] && a[1] === b[1]) {
       return pointToPoint(point, a);
     }
     var t = ((a[0] - b[0]) * (a[0] - point[0]) + (a[1] - b[1]) * (a[1] - point[1])) /
@@ -187,6 +226,17 @@
    *
    * @param {number} x 数值
    * @return 返回x的符号
+   '''<example>'''
+   * @example sign():base
+    ```js
+    console.log(JSON.stringify(jmaths.sign(10)));
+    // > 1
+    console.log(JSON.stringify(jmaths.sign(-10)));
+    // > -1
+    console.log(JSON.stringify(jmaths.sign(0)));
+    // > 0
+    ```
+   '''</example>'''
    */
   function sign(x) {
     return x === 0 ? 0 : (x < 0 ? -1 : 1);
@@ -204,6 +254,15 @@
    * @param {Array[number,number]} c 第二条线段坐标1
    * @param {Array[number,number]} d 第二条线段坐标2
    * @return {Array[number,number]} 返回两条线段的交点坐标
+   '''<example>'''
+   * @example doubleLineIntersect():base
+    ```js
+    console.log(JSON.stringify(jmaths.doubleLineIntersect([0, 0], [50, 50], [50, 0], [0, 50])));
+    // > [25,25]
+    console.log(String(jmaths.doubleLineIntersect([50, 0], [0, 30], [100, 35], [9, 200])));
+    // > undefined
+    ```
+   '''</example>'''
    */
   function doubleLineIntersect(a, b, c, d) {
     var ua_t = (d[0] - c[0]) * (a[1] - c[1]) - (d[1] - c[1]) * (a[0] - c[0]);
@@ -232,6 +291,15 @@
    * @param {Array[number,number]} point
    * @param {Array[Array[number,number]]} polyline
    * @return {number} 返回距离
+   '''<example>'''
+   * @example pointToPolyline():base
+    ```js
+    console.log(JSON.stringify(jmaths.pointToPolyline([1, 1], [[0, 0], [10, 0], [10, 10], [0, 10]])));
+    // > 1
+    console.log(JSON.stringify(jmaths.pointToPolyline([-1, 1], [[0, 0], [10, 0], [10, 10], [0, 10]])));
+    // > 1.4142135623730951
+    ```
+   '''</example>'''
    */
   function pointToPolyline(point, polyline) {
     if (!point || !polyline || !polyline.length) {
@@ -253,6 +321,15 @@
    * @param {Array} p 点坐标
    * @param {Array} polygon 多边形坐标
    * @return {boolean} 返回点是否在多边形中
+   '''<example>'''
+   * @example pointInPolygon():base
+    ```js
+    console.log(JSON.stringify(jmaths.pointInPolygon([1, 1], [[0, 0], [10, 0], [10, 10], [0, 10]])));
+    // > true
+    console.log(JSON.stringify(jmaths.pointInPolygon([-1, 1], [[0, 0], [10, 0], [10, 10], [0, 10]])));
+    // > false
+    ```
+   '''</example>'''
    */
   function pointInPolygon(p, polygon) {
     var cross = 0;
@@ -288,6 +365,13 @@
    * @param {number} radius 半径
    * @param {=number} starting 默认为 0
    * @return {Array} 返回正多边形顶点数组
+   '''<example>'''
+   * @example regularPolygon():base
+    ```js
+    console.log(JSON.stringify(jmaths.regularPolygon(3, 100, 100, 15, 0)));
+    // > [[115,100],[92.5,112.99038105676658],[92.5,87.00961894323342]]
+    ```
+   '''</example>'''
    */
   function regularPolygon(edges, x, y, radius, starting) {
     var angle = starting || 0;
