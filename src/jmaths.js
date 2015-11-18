@@ -32,6 +32,13 @@
    * @param {Array[number,number]} a 坐标1
    * @param {Array[number,number]} b 坐标2
    * @return {number} 返回点与点间的距离
+   '''<example>'''
+   * @example pointToPoint():base
+    ```js
+    console.log(jmaths.pointToPoint([0, 0], [3, 4]));
+    // > 5
+    ```
+   '''</example>'''
    */
   function pointToPoint(a, b) {
     return Math.sqrt(Math.pow(a[0] - b[0], 2) + Math.pow(a[1] - b[1], 2));
@@ -46,6 +53,13 @@
    * @param {Array} origin 圆心坐标
    * @param {Array} point 点坐标
    * @return {number} 返回角度，单位：弧度
+   '''<example>'''
+   * @example pointToAngle():base
+    ```js
+    console.log(jmaths.pointToAngle([0, 0], [3, 4]));
+    // > 0.9272952180016122
+    ```
+   '''</example>'''
    */
   function pointToAngle(origin, point) {
     return Math.atan2(point[1] - origin[1], point[0] - origin[0]);
@@ -61,6 +75,13 @@
    * @param {Array} center 中心点
    * @param {number} angle 选择角度，单位:弧度
    * @return {Array} 返回旋转后的坐标
+   '''<example>'''
+   * @example rotatePoint():base
+    ```js
+    console.log(JSON.stringify(jmaths.rotatePoint([0, 0], [3, 4], Math.PI)));
+    // > [6,8]
+    ```
+   '''</example>'''
    */
   function rotatePoint(point, center, angle) {
     var radius = pointToPoint(center, point); // 半径
