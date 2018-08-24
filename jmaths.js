@@ -6,8 +6,8 @@
    * Math JS Library
    * @author
    *   zswang (http://weibo.com/zswang)
-   * @version 0.0.11
-   * @date 2015-11-19
+   * @version 0.0.13
+   * @date 2018-08-24
    */
   /*<function name="pointToPoint">*/
   /**

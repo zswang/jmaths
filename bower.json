@@ -1,8 +1,8 @@
 {
   "name": "jmaths",
-  "version": "0.0.11",
+  "version": "0.0.13",
   "homepage": "https://github.com/zswang/jmaths",
-  "authors": {
+  "author": {
     "name": "zswang",
     "url": "http://weibo.com/zswang"
   },
